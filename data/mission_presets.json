@@ -1,0 +1,70 @@
+{
+  "presets": [
+    {
+      "id": "balanced",
+      "name": "Balanced Scientific Assessment",
+      "description": "Equal distribution across terrain morphology, mineral spectroscopy, climate, and roughness.",
+      "weights": {
+        "topography": 0.25,
+        "mineralogy": 0.25,
+        "temperature": 0.25,
+        "roughness": 0.25
+      }
+    },
+    {
+      "id": "rover_mobility",
+      "name": "Rover Mobility & Chassis Traction",
+      "description": "Prioritizes slope gradients, terrain ruggedness, and rock size abundance over chemical composition.",
+      "weights": {
+        "topography": 0.40,
+        "mineralogy": 0.10,
+        "temperature": 0.15,
+        "roughness": 0.35
+      }
+    },
+    {
+      "id": "ice_prospecting",
+      "name": "Cryogenic Volatiles & Ice Prospecting",
+      "description": "Emphasizes cryogenic temperatures, permafrost probability, and volatile/silica absorption features.",
+      "weights": {
+        "topography": 0.15,
+        "mineralogy": 0.30,
+        "temperature": 0.45,
+        "roughness": 0.10
+      }
+    },
+    {
+      "id": "biosignatures",
+      "name": "Astrobiology & Biosignature Preservation",
+      "description": "Highlights clay mudstone matrices, carbonate/sulfate evaporites, and dry lakebed sediments.",
+      "weights": {
+        "topography": 0.10,
+        "mineralogy": 0.55,
+        "temperature": 0.15,
+        "roughness": 0.20
+      }
+    },
+    {
+      "id": "lava_tube_spelunking",
+      "name": "Lava Tube Cave & Structural Habitat",
+      "description": "Focuses on intact basalt flows, vertical cliff skylights, and cavern thermal stability.",
+      "weights": {
+        "topography": 0.35,
+        "mineralogy": 0.35,
+        "temperature": 0.10,
+        "roughness": 0.20
+      }
+    },
+    {
+      "id": "isru_sintering",
+      "name": "ISRU Basalt Sintering & Dust Mitigation",
+      "description": "Prioritizes high iron/titanium flood basalt, fine-grained dust abrasiveness, and thermal diurnal cycling.",
+      "weights": {
+        "topography": 0.15,
+        "mineralogy": 0.45,
+        "temperature": 0.25,
+        "roughness": 0.15
+      }
+    }
+  ]
+}

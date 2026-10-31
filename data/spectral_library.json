@@ -1,0 +1,46 @@
+{
+  "spectral_library": [
+    {
+      "name": "Anorthosite (Lunar Highlands Endmember)",
+      "formula": "CaAl2Si2O8 (Bytownite/Anorthite)",
+      "bands_um": [0.45, 0.55, 0.65, 0.85, 1.05, 1.25, 1.65, 2.05, 2.35],
+      "reflectance": [0.35, 0.42, 0.48, 0.55, 0.46, 0.58, 0.64, 0.59, 0.54],
+      "diagnostic_features": "Broad Fe2+ substitution absorption band centered around 1.25 um, rising slope toward SWIR"
+    },
+    {
+      "name": "Tholeiitic Basalt (Lunar Mare / Martian Plains)",
+      "formula": "Clinopyroxene + Ca-Plagioclase + Titanomagnetite",
+      "bands_um": [0.45, 0.55, 0.65, 0.85, 1.05, 1.25, 1.65, 2.05, 2.35],
+      "reflectance": [0.06, 0.08, 0.10, 0.14, 0.09, 0.12, 0.15, 0.11, 0.13],
+      "diagnostic_features": "Characteristic dual Fe2+ pyroxene absorption minima near 1.05 um and 2.05 um"
+    },
+    {
+      "name": "Nontronite Clay (Smectite / Jezero Delta)",
+      "formula": "Fe2[Si4O10](OH)2·nH2O",
+      "bands_um": [0.45, 0.55, 0.65, 0.85, 1.05, 1.25, 1.65, 2.05, 2.35],
+      "reflectance": [0.12, 0.18, 0.28, 0.38, 0.36, 0.34, 0.29, 0.22, 0.15],
+      "diagnostic_features": "Strong metal-OH overtone at 1.41 um, H2O bend/stretch combination at 1.91 um, diagnostic Fe-OH doublet near 2.29-2.35 um"
+    },
+    {
+      "name": "Gypsum (Hydrated Sulfate)",
+      "formula": "CaSO4·2H2O",
+      "bands_um": [0.45, 0.55, 0.65, 0.85, 1.05, 1.25, 1.65, 2.05, 2.35],
+      "reflectance": [0.72, 0.78, 0.82, 0.85, 0.81, 0.76, 0.62, 0.35, 0.28],
+      "diagnostic_features": "Sharp, deep H2O vibrational absorptions at 1.45 um and 1.94 um, strong drop-off at 2.22 um"
+    },
+    {
+      "name": "Water Ice (Cryogenic Crystalline)",
+      "formula": "H2O (Hexagonal / Amorphous)",
+      "bands_um": [0.45, 0.55, 0.65, 0.85, 1.05, 1.25, 1.65, 2.05, 2.35],
+      "reflectance": [0.85, 0.86, 0.84, 0.79, 0.68, 0.45, 0.18, 0.06, 0.04],
+      "diagnostic_features": "Extreme absorption troughs at 1.50 um and 2.02 um; high VIS albedo rapidly crashing into zero NIR/SWIR reflectance"
+    },
+    {
+      "name": "Hematite (Ferric Iron Oxide)",
+      "formula": "alpha-Fe2O3",
+      "bands_um": [0.45, 0.55, 0.65, 0.85, 1.05, 1.25, 1.65, 2.05, 2.35],
+      "reflectance": [0.07, 0.14, 0.29, 0.36, 0.33, 0.32, 0.31, 0.29, 0.28],
+      "diagnostic_features": "Steep ferric absorption edge from UV to 0.55 um, crystal field 6A1 -> 4T1G absorption minimum at 0.86 um"
+    }
+  ]
+}

@@ -1,0 +1,265 @@
+{
+  "target_sites": [
+    {
+      "id": "lunar_south_pole",
+      "name": "Lunar South Pole (Shackleton Crater Rim / Artemis III Ridge)",
+      "body": "Moon",
+      "coordinates": {
+        "lat": -89.9,
+        "lon": 0.0,
+        "region": "South Pole-Aitken Basin Rim"
+      },
+      "mission_context": "Artemis III Crewed Landing & VIPER Subsurface Volatiles Prospecting",
+      "imagery": {
+        "source": "NASA LRO LOLA / LROC NAC / Diviner",
+        "description": "Permanently Shadowed Region (PSR) floor adjacent to peaks of eternal light",
+        "elevation_range": "Floor at -4,150 m, Rim crest at +1,280 m",
+        "map_center": [-89.9, 0.0]
+      },
+      "environmental_profile": {
+        "slope_mean_deg": 18.5,
+        "slope_max_deg": 32.0,
+        "roughness_tri": 0.78,
+        "rock_abundance_pct": 14.5,
+        "min_temperature_k": 38.0,
+        "max_temperature_k": 220.0,
+        "diurnal_delta_k": 182.0,
+        "aridity_index": 1.0,
+        "permafrost_ice_probability": 0.94,
+        "subsurface_ice_wt_pct": 5.5,
+        "vegetation_ndvi": 0.0
+      },
+      "mineralogy": {
+        "anorthosite": 0.85,
+        "basalt_pyroxene": 0.42,
+        "clays_phyllosilicates": 0.0,
+        "carbonates": 0.0,
+        "sulfates": 0.02,
+        "iron_oxides": 0.15,
+        "silica_volatiles": 0.72
+      },
+      "primary_engineering_challenges": [
+        "Rover mobility over loose, cryogenic, unweathered regolith dust in near-total darkness",
+        "Calibrating ground-penetrating radar to distinguish buried water-ice from rock clutter",
+        "Mechanical actuator lubrication and tire elasticity at 40 Kelvin (-233°C)",
+        "LiDAR visual SLAM navigation without solar illumination or GPS"
+      ],
+      "default_weights": {
+        "topography": 0.25,
+        "mineralogy": 0.20,
+        "temperature": 0.30,
+        "roughness": 0.25
+      },
+      "elevation_profile": [
+        {"dist_m": 0, "elev_m": 1250},
+        {"dist_m": 500, "elev_m": 1180},
+        {"dist_m": 1000, "elev_m": 940},
+        {"dist_m": 1500, "elev_m": 520},
+        {"dist_m": 2000, "elev_m": -120},
+        {"dist_m": 2500, "elev_m": -980},
+        {"dist_m": 3000, "elev_m": -2100},
+        {"dist_m": 3500, "elev_m": -3400},
+        {"dist_m": 4000, "elev_m": -4120},
+        {"dist_m": 4500, "elev_m": -4150},
+        {"dist_m": 5000, "elev_m": -4140}
+      ],
+      "spectral_bands": {
+        "bands_um": [0.45, 0.55, 0.65, 0.85, 1.05, 1.25, 1.65, 2.05, 2.35],
+        "reflectance": [0.08, 0.09, 0.11, 0.14, 0.12, 0.16, 0.18, 0.15, 0.19]
+      }
+    },
+    {
+      "id": "lunar_lava_tube",
+      "name": "Lunar Lava Tubes (Marius Hills Skylight)",
+      "body": "Moon",
+      "coordinates": {
+        "lat": 14.08,
+        "lon": -56.77,
+        "region": "Oceanus Procellarum"
+      },
+      "mission_context": "Long-Duration Subterranean Habitat & Autonomous Spelunking Rover",
+      "imagery": {
+        "source": "NASA LRO LROC NAC / JAXA SELENE",
+        "description": "65-meter diameter collapse skylight opening into vast sub-surface basaltic conduit",
+        "elevation_range": "Surface at -2,510 m, Pit floor at -2,598 m",
+        "map_center": [14.08, -56.77]
+      },
+      "environmental_profile": {
+        "slope_mean_deg": 8.2,
+        "slope_max_deg": 88.0,
+        "roughness_tri": 0.64,
+        "rock_abundance_pct": 22.0,
+        "min_temperature_k": 250.0,
+        "max_temperature_k": 255.0,
+        "diurnal_delta_k": 5.0,
+        "aridity_index": 1.0,
+        "permafrost_ice_probability": 0.05,
+        "subsurface_ice_wt_pct": 0.1,
+        "vegetation_ndvi": 0.0
+      },
+      "mineralogy": {
+        "anorthosite": 0.20,
+        "basalt_pyroxene": 0.92,
+        "clays_phyllosilicates": 0.0,
+        "carbonates": 0.0,
+        "sulfates": 0.05,
+        "iron_oxides": 0.45,
+        "silica_volatiles": 0.10
+      },
+      "primary_engineering_challenges": [
+        "Vertical tethered deployment and winching of rovers down 80-meter vertical basalt walls",
+        "3D LiDAR cavity reconstruction and basalt roof structural stability assessment without GNSS",
+        "Extreme non-line-of-sight RF communications through dense tholeiitic basalt shielding",
+        "ISRU extraction of iron, titanium, and basalt fibers for pressurized underground habitats"
+      ],
+      "default_weights": {
+        "topography": 0.35,
+        "mineralogy": 0.30,
+        "temperature": 0.10,
+        "roughness": 0.25
+      },
+      "elevation_profile": [
+        {"dist_m": 0, "elev_m": -2510},
+        {"dist_m": 200, "elev_m": -2512},
+        {"dist_m": 380, "elev_m": -2515},
+        {"dist_m": 400, "elev_m": -2595},
+        {"dist_m": 435, "elev_m": -2598},
+        {"dist_m": 465, "elev_m": -2596},
+        {"dist_m": 470, "elev_m": -2514},
+        {"dist_m": 600, "elev_m": -2511},
+        {"dist_m": 800, "elev_m": -2510}
+      ],
+      "spectral_bands": {
+        "bands_um": [0.45, 0.55, 0.65, 0.85, 1.05, 1.25, 1.65, 2.05, 2.35],
+        "reflectance": [0.06, 0.07, 0.09, 0.12, 0.08, 0.11, 0.13, 0.11, 0.12]
+      }
+    },
+    {
+      "id": "mars_ancient_lakebed",
+      "name": "Martian Ancient Lakebeds (Jezero Crater Western Delta)",
+      "body": "Mars",
+      "coordinates": {
+        "lat": 18.38,
+        "lon": 77.58,
+        "region": "Syrtis Major Quadrangle / Nili Fossae"
+      },
+      "mission_context": "Perseverance Sample Return & Astrobiological Biosignature Preservation",
+      "imagery": {
+        "source": "NASA MRO HiRISE / CRISM",
+        "description": "Fluvial fan delta with fine-grained smectite clay mudstones, carbonates, and olivine",
+        "elevation_range": "-2,530 m to -2,350 m",
+        "map_center": [18.38, 77.58]
+      },
+      "environmental_profile": {
+        "slope_mean_deg": 6.8,
+        "slope_max_deg": 24.5,
+        "roughness_tri": 0.52,
+        "rock_abundance_pct": 18.0,
+        "min_temperature_k": 180.0,
+        "max_temperature_k": 285.0,
+        "diurnal_delta_k": 105.0,
+        "aridity_index": 0.98,
+        "permafrost_ice_probability": 0.35,
+        "subsurface_ice_wt_pct": 1.2,
+        "vegetation_ndvi": 0.0
+      },
+      "mineralogy": {
+        "anorthosite": 0.10,
+        "basalt_pyroxene": 0.55,
+        "clays_phyllosilicates": 0.88,
+        "carbonates": 0.82,
+        "sulfates": 0.65,
+        "iron_oxides": 0.70,
+        "silica_volatiles": 0.60
+      },
+      "primary_engineering_challenges": [
+        "Rotary-percussive core drilling through friable deltaic clay mudstones without cross-contamination",
+        "Deep UV Raman / luminescence spectrometer (SHERLOC / WATSON) detection of organic biosignatures",
+        "Severe rover wheel grouser puncturing against razor-sharp wind-etched ventifacts",
+        "Fine electrostatic silicate/clay dust accumulation on optical lenses and calibration targets"
+      ],
+      "default_weights": {
+        "topography": 0.15,
+        "mineralogy": 0.45,
+        "temperature": 0.15,
+        "roughness": 0.25
+      },
+      "elevation_profile": [
+        {"dist_m": 0, "elev_m": -2530},
+        {"dist_m": 800, "elev_m": -2520},
+        {"dist_m": 1600, "elev_m": -2480},
+        {"dist_m": 2400, "elev_m": -2410},
+        {"dist_m": 3200, "elev_m": -2380},
+        {"dist_m": 4000, "elev_m": -2360},
+        {"dist_m": 4800, "elev_m": -2350}
+      ],
+      "spectral_bands": {
+        "bands_um": [0.45, 0.55, 0.65, 0.85, 1.05, 1.25, 1.65, 2.05, 2.35],
+        "reflectance": [0.12, 0.16, 0.24, 0.32, 0.30, 0.28, 0.24, 0.19, 0.17]
+      }
+    },
+    {
+      "id": "mars_volcanic_plains",
+      "name": "Martian Volcanic Plains (Elysium Planitia & Cerberus Fossae)",
+      "body": "Mars",
+      "coordinates": {
+        "lat": 4.5,
+        "lon": 156.2,
+        "region": "Elysium Quadrangle"
+      },
+      "mission_context": "InSight Geophysics & Future Mars Base ISRU Sintering Infrastructure",
+      "imagery": {
+        "source": "NASA MRO CTX / MOLA Altimetry",
+        "description": "Young flood basalt plains with platy-ridged lava textures, mantled by ferric dust",
+        "elevation_range": "-2,620 m to -2,590 m",
+        "map_center": [4.5, 156.2]
+      },
+      "environmental_profile": {
+        "slope_mean_deg": 3.4,
+        "slope_max_deg": 12.0,
+        "roughness_tri": 0.41,
+        "rock_abundance_pct": 12.0,
+        "min_temperature_k": 175.0,
+        "max_temperature_k": 270.0,
+        "diurnal_delta_k": 95.0,
+        "aridity_index": 0.99,
+        "permafrost_ice_probability": 0.65,
+        "subsurface_ice_wt_pct": 3.0,
+        "vegetation_ndvi": 0.0
+      },
+      "mineralogy": {
+        "anorthosite": 0.15,
+        "basalt_pyroxene": 0.90,
+        "clays_phyllosilicates": 0.12,
+        "carbonates": 0.05,
+        "sulfates": 0.35,
+        "iron_oxides": 0.82,
+        "silica_volatiles": 0.25
+      },
+      "primary_engineering_challenges": [
+        "In-situ resource utilization (ISRU): microwave sintering of high-iron basaltic regolith for launch/landing pads",
+        "Long-range autonomous rover mobility across platy, fractured basalt crusts over friable sub-surface regolith",
+        "Fine ferric oxide dust accumulation affecting mechanical joints, bearings, and solar arrays",
+        "Seismic sensor grounding in dry regolith mixed with shallow basaltic permafrost"
+      ],
+      "default_weights": {
+        "topography": 0.20,
+        "mineralogy": 0.35,
+        "temperature": 0.15,
+        "roughness": 0.30
+      },
+      "elevation_profile": [
+        {"dist_m": 0, "elev_m": -2620},
+        {"dist_m": 1000, "elev_m": -2615},
+        {"dist_m": 2000, "elev_m": -2610},
+        {"dist_m": 3000, "elev_m": -2598},
+        {"dist_m": 4000, "elev_m": -2602},
+        {"dist_m": 5000, "elev_m": -2590}
+      ],
+      "spectral_bands": {
+        "bands_um": [0.45, 0.55, 0.65, 0.85, 1.05, 1.25, 1.65, 2.05, 2.35],
+        "reflectance": [0.10, 0.14, 0.26, 0.35, 0.31, 0.29, 0.25, 0.21, 0.22]
+      }
+    }
+  ]
+}

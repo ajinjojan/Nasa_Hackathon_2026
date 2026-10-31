@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Ajin Jojan">
+  <meta name="contact" content="ajinjojan@gmail.com">
+  <meta name="creator" content="Ajin Jojan (https://github.com/ajinjojan)">
+  <meta name="description" content="NASA Terrestrial Analog Finder developed by Ajin Jojan (ajinjojan@gmail.com, GitHub: ajinjojan)">
+  <!-- Lead Architect & Systems Engineer: Ajin Jojan | Email: ajinjojan@gmail.com | GitHub: https://github.com/ajinjojan -->
+  <title>NASA Terrestrial Analog Finder | Planetary Mission GIS & Analytical Platform</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Leaflet GIS Mapping CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  
+  <!-- Application CSS -->
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+
+  <!-- Top Aerospace Header & Status HUD -->
+  <header>
+    <div class="brand-container">
+      <div class="nasa-meatball"></div>
+      <div class="brand-titles">
+        <h1>TERRESTRIAL <span class="highlight">ANALOG FINDER</span></h1>
+        <p>SYSTEMATIC SATELLITE CHARACTERIZATION & EVALUATION ENGINE // ARTEMIS & MSR</p>
+      </div>
+    </div>
+    <div class="header-status-pills">
+      <div class="hud-pill">
+        <span class="status-dot"></span>
+        <span>SATELLITE PIPELINE: ONLINE</span>
+      </div>
+      <div class="hud-pill" style="border-color: rgba(0, 240, 255, 0.4); color: var(--cyan-accent);">
+        <span>CRISM • LOLA • ASTER • SENTINEL-2</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main App Container -->
+  <main class="app-container">
+
+    <!-- Mission Control Bar & Dynamic Weights -->
+    <section class="control-panel-bar">
+      <!-- Target Site Selector -->
+      <div class="control-group">
+        <label class="control-label" for="target-site-select">
+          <span>Target Space Destination</span>
+          <span style="color:var(--cyan-accent); font-family:var(--font-mono);">[CELESTIAL BASE]</span>
+        </label>
+        <select id="target-site-select" class="cyber-select">
+          <option value="lunar_south_pole">Lunar South Pole (Shackleton Crater Rim / Artemis III)</option>
+          <option value="lunar_lava_tube">Lunar Lava Tubes (Marius Hills Skylight)</option>
+          <option value="mars_ancient_lakebed">Martian Ancient Lakebeds (Jezero Crater Delta)</option>
+          <option value="mars_volcanic_plains">Martian Volcanic Plains (Elysium Planitia & Cerberus)</option>
+        </select>
+      </div>
+
+      <!-- Mission Prioritization Presets -->
+      <div class="control-group">
+        <label class="control-label">
+          <span>Mission Prioritization Presets</span>
+          <span style="color:var(--amber-accent); font-family:var(--font-mono);">[MCDA PROFILE]</span>
+        </label>
+        <div class="preset-buttons" id="preset-buttons-container">
+          <!-- Dynamically populated from mission_presets.json -->
+        </div>
+      </div>
+
+      <!-- Multi-Criteria Sliders -->
+      <div class="control-group">
+        <label class="control-label">
+          <span>Analytic Hierarchy Process (MCDA Sliders)</span>
+          <span style="color:var(--green-accent); font-family:var(--font-mono);">[DYNAMIC WEIGHTS]</span>
+        </label>
+        <div class="sliders-grid">
+          <div class="slider-item">
+            <div class="slider-header">
+              <span>Topography / Slope:</span>
+              <span id="val-topography" class="slider-val">25%</span>
+            </div>
+            <input type="range" id="slider-topography" class="cyber-slider" min="0" max="100" value="25">
+          </div>
+          <div class="slider-item">
+            <div class="slider-header">
+              <span>Mineralogy / Spectra:</span>
+              <span id="val-mineralogy" class="slider-val">20%</span>
+            </div>
+            <input type="range" id="slider-mineralogy" class="cyber-slider" min="0" max="100" value="20">
+          </div>
+          <div class="slider-item">
+            <div class="slider-header">
+              <span>Temperature / Thermal:</span>
+              <span id="val-temperature" class="slider-val">30%</span>
+            </div>
+            <input type="range" id="slider-temperature" class="cyber-slider" min="0" max="100" value="30">
+          </div>
+          <div class="slider-item">
+            <div class="slider-header">
+              <span>Surface Roughness:</span>
+              <span id="val-roughness" class="slider-val">25%</span>
+            </div>
+            <input type="range" id="slider-roughness" class="cyber-slider" min="0" max="100" value="25">
+          </div>
+        </div>
+      </div>
+
+      <!-- Primary Action Buttons -->
+      <div class="action-buttons">
+        <button id="btn-open-dossier" class="btn-primary">
+          <span>📑 Field Mission Dossier</span>
+        </button>
+        <button id="btn-export-csv" class="btn-secondary">
+          <span>⬇️ Export Analysis CSV</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Split-Screen Visual Comparison Deck -->
+    <section class="comparison-deck">
+      
+      <!-- Left Card: Extraterrestrial Target Site -->
+      <article class="site-card target-side">
+        <div class="card-header-flex">
+          <div>
+            <span id="target-badge" class="badge-tag badge-moon">MOON / LRO LOLA</span>
+            <h2 id="target-title" class="site-title">Lunar South Pole (Shackleton Crater Rim)</h2>
+            <div id="target-subtitle" class="site-subtitle">Artemis III Crewed Landing & VIPER Subsurface Prospecting</div>
+          </div>
+          <div class="hud-pill" style="border-color: rgba(96, 165, 250, 0.4); color: #93c5fd;">
+            <span>TARGET BASELINE</span>
+          </div>
+        </div>
+
+        <!-- Canvas Extraterrestrial Map Viewer -->
+        <div class="map-viewport-wrapper">
+          <canvas id="target-map-canvas"></canvas>
+          <div class="map-hud-overlay">
+            <span>NASA LOLA / CRISM SPECTRAL & ELEVATION DEM OVERLAY</span>
+          </div>
+        </div>
+
+        <!-- Target Telemetry Stats Grid -->
+        <div class="telemetry-grid">
+          <div class="telemetry-card">
+            <span class="telem-label">Mean Slope</span>
+            <span id="tgt-slope" class="telem-value">18.5°</span>
+            <span class="telem-unit">Terrain angle</span>
+          </div>
+          <div class="telemetry-card">
+            <span class="telem-label">Roughness TRI</span>
+            <span id="tgt-rough" class="telem-value">0.78</span>
+            <span class="telem-unit">Index [0-1]</span>
+          </div>
+          <div class="telemetry-card">
+            <span class="telem-label">Diurnal &Delta;T</span>
+            <span id="tgt-temp-delta" class="telem-value">182 K</span>
+            <span class="telem-unit">Thermal swing</span>
+          </div>
+          <div class="telemetry-card">
+            <span class="telem-label">Ice / Volatiles</span>
+            <span id="tgt-ice" class="telem-value">5.5%</span>
+            <span class="telem-unit">Weight percent</span>
+          </div>
+        </div>
+
+        <!-- Target Engineering Hazards -->
+        <div class="info-section-box">
+          <div class="info-section-title">
+            <span>⚠️ Critical Engineering & Mobility Hazards</span>
+          </div>
+          <ul id="target-hazards-list" class="info-list">
+            <!-- Populated via JS -->
+          </ul>
+        </div>
+      </article>
+
+      <!-- Right Card: Matched Terrestrial Analog Site -->
+      <article class="site-card analog-side">
+        <div class="card-header-flex">
+          <div>
+            <span class="badge-tag badge-earth">EARTH / HIGH-RES SATELLITE</span>
+            <h2 id="analog-title" class="site-title">Puga Valley & Tso Kar Basin (Ladakh, India)</h2>
+            <div id="analog-subtitle" class="site-subtitle">India | Elev: 4,480m | Novel High-Altitude Cryosphere</div>
+          </div>
+          <div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px;">
+            <div id="analog-match-score" class="badge-match-score">
+              94.6% MATCH
+            </div>
+            <a id="btn-street-view" href="#" target="_blank" rel="noopener noreferrer" class="btn-streetview-pill" title="Open Street View & 360° Ground Photospheres on Google Maps">
+              📷 Ground & Street View ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- Leaflet Earth Satellite GIS Map -->
+        <div class="map-viewport-wrapper">
+          <div id="earth-map"></div>
+          <div class="map-layer-selector">
+            <button class="layer-btn active" data-layer="satellite" title="Esri High-Resolution Satellite Imagery">SATELLITE</button>
+            <button class="layer-btn" data-layer="topo" title="Esri World Topographic Relief">TOPO</button>
+            <button class="layer-btn" data-layer="street" title="Esri World Street Map">STREET</button>
+          </div>
+          <div class="map-hud-overlay">
+            <span>5 KM OPERATIONAL SORTIE RADIUS BUFFER</span>
+          </div>
+        </div>
+
+        <!-- Analog Telemetry Stats Grid -->
+        <div class="telemetry-grid">
+          <div class="telemetry-card">
+            <span class="telem-label">Mean Slope</span>
+            <span id="ana-slope" class="telem-value">14.8°</span>
+            <span class="telem-unit">SRTM / Copernicus</span>
+          </div>
+          <div class="telemetry-card">
+            <span class="telem-label">Roughness TRI</span>
+            <span id="ana-rough" class="telem-value">0.72</span>
+            <span class="telem-unit">Terrain Ruggedness</span>
+          </div>
+          <div class="telemetry-card">
+            <span class="telem-label">Diurnal &Delta;T</span>
+            <span id="ana-temp-delta" class="telem-value">32 K</span>
+            <span class="telem-unit">MODIS LST range</span>
+          </div>
+          <div class="telemetry-card">
+            <span class="telem-label">Permafrost Ground Ice</span>
+            <span id="ana-ice" class="telem-value">4.8%</span>
+            <span class="telem-unit">Subsurface content</span>
+          </div>
+        </div>
+
+        <!-- Testing Focus Box -->
+        <div class="info-section-box" style="border-left-color: var(--green-accent);">
+          <div class="info-section-title" style="color: var(--green-accent);">
+            <span>🎯 Primary Field Testing Protocols</span>
+          </div>
+          <ul id="analog-focus-list" class="info-list">
+            <!-- Populated via JS -->
+          </ul>
+        </div>
+
+        <!-- Satellite Provenance Pills -->
+        <div id="analog-provenance-box" class="provenance-flex">
+          <!-- Populated via JS -->
+        </div>
+      </article>
+
+    </section>
+
+    <!-- Side-by-Side Synchronized Dual Profilers -->
+    <section class="profiler-deck">
+      
+      <!-- Profiler 1: Topographic Elevation Cross-Section -->
+      <div class="profiler-card">
+        <div class="profiler-header">
+          <div class="profiler-title">
+            <span>📐 Topographic Elevation Transect Comparison (0 - 5,000 m)</span>
+          </div>
+          <div class="chart-legend">
+            <div class="legend-item">
+              <span class="legend-color" style="background:#60a5fa;"></span>
+              <span>Target Relative Relief</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-color" style="background:#10b981; border: 1px dashed #fff;"></span>
+              <span>Earth Analog Relief</span>
+            </div>
+          </div>
+        </div>
+        <div class="profiler-canvas-wrapper">
+          <canvas id="elevation-canvas" class="profiler-canvas"></canvas>
+        </div>
+      </div>
+
+      <!-- Profiler 2: Multi-Spectral Reflectance Profile -->
+      <div class="profiler-card">
+        <div class="profiler-header">
+          <div class="profiler-title">
+            <span>🔬 Multi-Spectral Reflectance Profile (0.45 - 2.35 &mu;m)</span>
+          </div>
+          <div class="chart-legend">
+            <div class="legend-item">
+              <span class="legend-color" style="background:#60a5fa;"></span>
+              <span>Target Reflectance</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-color" style="background:#10b981;"></span>
+              <span>Analog Reflectance</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-color" style="background:#a855f7;"></span>
+              <span>Mineral Endmember</span>
+            </div>
+          </div>
+        </div>
+        <div class="profiler-canvas-wrapper">
+          <canvas id="spectral-canvas" class="profiler-canvas"></canvas>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Global Candidate Analog Ranking Matrix -->
+    <section class="ranking-section">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <h3 style="font-size:1.1rem; font-weight:800; color:#fff;">GLOBAL CANDIDATE ANALOG RANKING MATRIX</h3>
+          <p style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">
+            Ranked multi-criteria decision analysis (MCDA) across all investigated Earth locations
+          </p>
+        </div>
+        <div>
+          <button id="btn-reset-weights" class="btn-secondary" style="font-size:0.72rem; padding:6px 12px;">
+            ↺ Reset Weights
+          </button>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="ranking-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Analog Site & Location</th>
+              <th>Classification</th>
+              <th>Topo Match</th>
+              <th>Mineral Match</th>
+              <th>Thermal Match</th>
+              <th>Roughness Match</th>
+              <th>Composite Score</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="ranking-table-body">
+            <!-- Populated via JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal: Mission Briefing Dossier -->
+  <div id="dossier-modal" class="modal-backdrop">
+    <div class="modal-dossier-card">
+      <button class="close-modal-btn" onclick="document.getElementById('dossier-modal').classList.remove('active')">&times;</button>
+      <div id="dossier-content-area">
+        <!-- Injected via dossier-generator.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 
+    NASA International Space Apps Challenge 2026
+    Lead Architect & Planetary Systems Developer: Ajin Jojan
+    Email: ajinjojan@gmail.com
+    GitHub: https://github.com/ajinjojan
+    Signature Hash: AJIN-JOJAN-NASA-ANALOG-2026
+  -->
+  <footer style="text-align: center; padding: 24px 0 16px 0; font-size: 0.75rem; color: #64748b; font-family: var(--font-mono); border-top: 1px solid rgba(56, 189, 248, 0.15); margin-top: 32px;">
+    <span>NASA Terrestrial Analog Finder &bull; Lead Architect: <a href="https://github.com/ajinjojan" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; text-decoration: none; font-weight: 700;">Ajin Jojan</a> (<a href="mailto:ajinjojan@gmail.com" style="color: #94a3b8; text-decoration: none;">ajinjojan@gmail.com</a>) &bull; GitHub: <a href="https://github.com/ajinjojan" target="_blank" rel="noopener noreferrer" style="color: #38bdf8; text-decoration: none;">@ajinjojan</a></span>
+  </footer>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  
+  <!-- Embedded Datasets (Ensures instant loading even via file:// protocol) -->
+  <script src="./data/embedded-data.js"></script>
+
+  <!-- App Scripts -->
+  <script src="./js/similarity-engine.js"></script>
+  <script src="./js/map-engine.js"></script>
+  <script src="./js/elevation-profiler.js"></script>
+  <script src="./js/spectral-profiler.js"></script>
+  <script src="./js/dossier-generator.js"></script>
+  <script src="./js/app.js"></script>
+</body>
+</html>
